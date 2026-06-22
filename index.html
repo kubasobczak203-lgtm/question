@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mam pytanie</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #ffe6f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1 {
+    color: #ff4081;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 15px 30px;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+#yesBtn {
+    background: #4caf50;
+    color: white;
+}
+
+#noBtn {
+    background: #f44336;
+    color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Dasz zaprosić się na spotkanie?</h1>
+
+```
+<div class="buttons">
+    <button id="yesBtn">Tak</button>
+    <button id="noBtn">Nie</button>
+</div>
+```
+
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+let yesScale = 1;
+let noScale = 1;
+let clicks = 0;
+
+const messages = [
+    "Na pewno nie?",
+    "Dobrze się zastanów",
+    "Naprawdę nie?",
+    "Ostatnia szansa",
+    "TAK wygląda coraz lepiej "
+];
+
+noBtn.addEventListener("click", () => {
+    clicks++;
+
+    // TAK rośnie
+    yesScale += 0.25;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    // NIE maleje
+    noScale -= 0.15;
+
+    if (noScale > 0) {
+        noBtn.style.transform = `scale(${noScale})`;
+    }
+
+    noBtn.textContent =
+        messages[Math.floor(Math.random() * messages.length)];
+
+    // po 5 kliknięciach znika
+    if (clicks >= 5) {
+        noBtn.style.opacity = "0";
+
+        setTimeout(() => {
+            noBtn.style.display = "none";
+        }, 500);
+    }
+});
+
+yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            font-size:50px;
+            color:#ff4081;
+            text-align:center;
+            flex-direction:column;
+        ">
+             Dziękuję bardzo! 
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
