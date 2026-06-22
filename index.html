@@ -85,32 +85,48 @@ const messages = [
     "Ostatnia szansa",
 ];
 
+const messages = [
+"Na pewno nie?",
+"Dobrze się zastanów",
+"Naprawdę nie?",
+"Ostatnia szansa"
+];
+
+let currentMessage = 0;
+
 noBtn.addEventListener("click", () => {
-    clicks++;
+clicks++;
 
-    // TAK rośnie
-    yesScale += 0.25;
-    yesBtn.style.transform = `scale(${yesScale})`;
+```
+// TAK rośnie
+yesScale += 0.25;
+yesBtn.style.transform = `scale(${yesScale})`;
 
-    // NIE maleje
-    noScale -= 0.15;
+// NIE maleje
+noScale -= 0.15;
 
-    if (noScale > 0) {
-        noBtn.style.transform = `scale(${noScale})`;
-    }
+if (noScale > 0) {
+    noBtn.style.transform = `scale(${noScale})`;
+}
 
-    noBtn.textContent =
-        messages[Math.floor(Math.random() * messages.length)];
+// kolejne napisy bez powtórek
+if (currentMessage < messages.length) {
+    noBtn.textContent = messages[currentMessage];
+    currentMessage++;
+}
 
-    // po 5 kliknięciach znika
-    if (clicks >= 5) {
-        noBtn.style.opacity = "0";
+// po 5 kliknięciach znika
+if (clicks >= 5) {
+    noBtn.style.opacity = "0";
 
-        setTimeout(() => {
-            noBtn.style.display = "none";
-        }, 500);
-    }
+    setTimeout(() => {
+        noBtn.style.display = "none";
+    }, 500);
+}
+```
+
 });
+
 
 yesBtn.addEventListener("click", () => {
     document.body.innerHTML = `
