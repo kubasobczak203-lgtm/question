@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mam pytanie </title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #ffe6f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 600px;
+}
+
+h1 {
+    color: #ff4081;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 15px 30px;
+    font-size: 20px;
+}
+
+#yesBtn {
+    background: #4caf50;
+    color: white;
+}
+
+#noBtn {
+    background: #f44336;
+    color: white;
+}
+
+.success {
+    font-size: 40px;
+    color: #ff4081;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Da radę wyciągnąć Cię na spotkanie?</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Tak </button>
+        <button id="noBtn">Nie </button>
+    </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+let scale = 1;
+
+noBtn.addEventListener("click", () => {
+    scale += 0.3;
+
+    yesBtn.style.transform = `scale(${scale})`;
+
+    const messages = [
+        "Na pewno nie?",
+        "Dobrze się zastanów ",
+        "Naprawdę nie?",
+        "Ostatnia szansa ",
+        "Przycisk TAK wygląda coraz lepiej "
+    ];
+
+    noBtn.textContent =
+        messages[Math.floor(Math.random() * messages.length)];
+});
+
+yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            font-size:50px;
+            color:#ff4081;
+            text-align:center;
+        ">
+            Dziękuję bardzo! 
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
